@@ -12,6 +12,11 @@ import {
   View,
 } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
+import { useLayoutEffect } from 'react';
+
+
+
 const mockHabits = [
   { id: '1', title: 'Run a mile', completed: false },
   { id: '2', title: 'Eat Breakfast', completed: false },
@@ -21,8 +26,20 @@ const mockHabits = [
   { id: '6', title: 'Play Hard', completed: false },
 ];
 
-export default function HomeScreen() {
-  const [habits, setHabits] = useState(mockHabits);
+
+
+  export default function HomeScreen() {
+    const [habits, setHabits] = useState(mockHabits);
+
+    const navigation = useNavigation();
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: 'Daily Routine',
+      headerTitleAlign: 'center',
+    });
+  }, [navigation]);
+
 
   useEffect(() => {
   const loadHabits = async () => {
@@ -162,6 +179,13 @@ export default function HomeScreen() {
     </SafeAreaView>
   );
 }
+
+export const options = {
+  title: 'Daily Routine',
+  headerTitleAlign: 'center',
+};
+
+
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, backgroundColor: '#fff' },
