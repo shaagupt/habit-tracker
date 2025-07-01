@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import {
+  Alert,
   FlatList,
   Keyboard,
   SafeAreaView,
@@ -88,6 +89,12 @@ export default function HomeScreen() {
     Keyboard.dismiss();
   };
 
+  const deleteHabit = (id: string) => {
+  const updatedHabits = habits.filter(habit => habit.id !== id);
+  setHabits(updatedHabits);
+};
+
+
 
   return (
     <SafeAreaView style={styles.container}>
@@ -117,17 +124,39 @@ export default function HomeScreen() {
         data={habits}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.habitCard}>
-            <Text style={styles.habitText}>{item.title}</Text>
-            <TouchableOpacity
-              style={styles.doneButton}
-              onPress={() => toggleHabit(item.id)}
-            >
-              <Text style={styles.doneText}>
-                {item.completed ? '✅' : ''}
-              </Text>
-            </TouchableOpacity>
-          </View>
+        <View style={styles.habitCard}>
+      <Text style={styles.habitText}>{item.title}</Text>
+
+      <View style={{ flexDirection: 'row' }}>
+        <TouchableOpacity
+          style={styles.doneButton}
+          onPress={() => toggleHabit(item.id)}
+        >
+          <Text style={styles.doneText}>{item.completed ? '✅' : ''}</Text>
+        </TouchableOpacity>
+
+       <TouchableOpacity
+  style={styles.deleteButton}
+  onPress={() => {
+    Alert.alert(
+      'Delete Habit',
+      'Are you sure you want to delete this habit?',
+      [
+        { text: 'Cancel', style: 'cancel' },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: () => deleteHabit(item.id),
+        },
+      ]
+    );
+  }}
+>
+  <Text style={styles.deleteText}>🗑️</Text>
+</TouchableOpacity>
+
+      </View>
+    </View>
         )}
       />
     </SafeAreaView>
@@ -178,4 +207,14 @@ addButtonText: {
   fontSize: 24,
   fontWeight: 'bold',
 },
+deleteButton: {
+  marginLeft: 10,
+  padding: 10,
+},
+
+deleteText: {
+  fontSize: 18,
+  color: 'red',
+},
+
 });
