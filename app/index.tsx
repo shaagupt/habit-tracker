@@ -35,7 +35,7 @@ const mockHabits = [
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: 'Daily Routine',
+      title: 'My Routine',
       headerTitleAlign: 'center',
     });
   }, [navigation]);
