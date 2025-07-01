@@ -135,24 +135,24 @@ export default function HomeScreen() {
           <Text style={styles.doneText}>{item.completed ? '✅' : ''}</Text>
         </TouchableOpacity>
 
-       <TouchableOpacity
-  style={styles.deleteButton}
-  onPress={() => {
-    Alert.alert(
-      'Delete Habit',
-      'Are you sure you want to delete this habit?',
-      [
-        { text: 'Cancel', style: 'cancel' },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: () => deleteHabit(item.id),
-        },
-      ]
-    );
-  }}
->
-  <Text style={styles.deleteText}>🗑️</Text>
+          <TouchableOpacity
+      style={styles.deleteButton}
+      onPress={() => {
+        Alert.alert(
+          'Delete Habit',
+          'Are you sure you want to delete this habit?',
+          [
+            { text: 'Cancel', style: 'cancel' },
+            {
+              text: 'Delete',
+              style: 'destructive',
+              onPress: () => deleteHabit(item.id),
+            },
+          ]
+        );
+      }}
+    >
+  <Text style={styles.deleteText}>❌</Text>
 </TouchableOpacity>
 
       </View>
@@ -165,27 +165,39 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, backgroundColor: '#fff' },
-  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
+  title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, marginLeft:20},
     date: {
     fontSize: 16,
     color: '#666',
     marginBottom: 5,
+    marginTop:20,
+    marginLeft:20,
   },
   habitCard: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 15,
-    marginBottom: 10,
-    backgroundColor: 'purple',
-    borderRadius: 8,
-  },
-  habitText: { fontSize: 16 },
+  backgroundColor: 'purple',
+  padding: 16,
+  marginBottom: 10,
+  marginLeft:10,
+  marginRight:10,
+  borderRadius: 10,
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 1 },
+  shadowOpacity: 0.1,
+  shadowRadius: 3,
+  elevation: 2,
+},
+
+  habitText: { fontSize: 16, fontWeight: '800', color: 'black', paddingLeft: 10},
   doneButton: { backgroundColor: 'white', padding: 8, borderRadius: 5 },
   doneText: { color: 'white' },
 
   inputContainer: {
   flexDirection: 'row',
   marginBottom: 20,
+  marginLeft: 167,
 },
 input: {
   flex: 1,
@@ -201,6 +213,7 @@ addButton: {
   paddingHorizontal: 16,
   justifyContent: 'center',
   borderRadius: 8,
+  marginRight: 10,
 },
 addButtonText: {
   color: 'white',
