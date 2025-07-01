@@ -152,7 +152,7 @@ export default function HomeScreen() {
         );
       }}
     >
-  <Text style={styles.deleteText}>❌</Text>
+  <Text style={styles.deleteText}>␡</Text>
 </TouchableOpacity>
 
       </View>
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     marginLeft:20,
   },
   habitCard: {
-  backgroundColor: 'purple',
+  backgroundColor: 'lavender',
   padding: 16,
   marginBottom: 10,
   marginLeft:10,
@@ -191,8 +191,17 @@ const styles = StyleSheet.create({
 },
 
   habitText: { fontSize: 16, fontWeight: '800', color: 'black', paddingLeft: 10},
-  doneButton: { backgroundColor: 'white', padding: 8, borderRadius: 5 },
-  doneText: { color: 'white' },
+  doneButton: {   width: 40,
+  height: 40,
+  borderRadius: 8,
+  backgroundColor: '#fff',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginLeft: 8,
+  borderWidth: 2,
+  borderColor: '#ccc', },
+  doneText: { fontSize: 24,
+  textAlign: 'center', },
 
   inputContainer: {
   flexDirection: 'row',
@@ -226,7 +235,7 @@ deleteButton: {
 },
 
 deleteText: {
-  fontSize: 18,
+  fontSize: 25,
   color: 'red',
 },
 
