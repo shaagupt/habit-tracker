@@ -1,3 +1,5 @@
+
+// Initial Imports
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import {
@@ -12,11 +14,12 @@ import {
   View,
 } from 'react-native';
 
+// Navigation Imports For Header
 import { useNavigation } from '@react-navigation/native';
 import { useLayoutEffect } from 'react';
 
 
-
+// Initital Hard Coded Data
 const mockHabits = [
   { id: '1', title: 'Run a mile', completed: false },
   { id: '2', title: 'Eat Breakfast', completed: false },
@@ -27,12 +30,14 @@ const mockHabits = [
 ];
 
 
-
   export default function HomeScreen() {
+  // State For All Habits
     const [habits, setHabits] = useState(mockHabits);
 
+    // Navigation Object To Customize Header
     const navigation = useNavigation();
 
+    // Header Layout And Rendering
   useLayoutEffect(() => {
     navigation.setOptions({
       title: 'My Routine',
@@ -41,6 +46,7 @@ const mockHabits = [
   }, [navigation]);
 
 
+  // Load Data from Local Storage When Loaded
   useEffect(() => {
   const loadHabits = async () => {
     try {
@@ -57,12 +63,13 @@ const mockHabits = [
 }, []);
 
 
+// State For New Habit Field 
   const [newHabit, setNewHabit] = useState('');
 
-
+// State For Current Date
   const [currentDate, setCurrentDate] = useState(new Date());
 
-
+// Updates Date Every Minute
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentDate(new Date());
@@ -71,6 +78,7 @@ const mockHabits = [
     return () => clearInterval(timer); 
   }, []);
 
+  // Completion Status Of A Habit
   const toggleHabit = (id: string) => {
   setHabits(prevHabits =>
     prevHabits.map(habit =>
@@ -79,6 +87,7 @@ const mockHabits = [
   );
 };
 
+// Saving Habits
   useEffect(() => {
     const saveHabits = async () => {
       try {
@@ -92,6 +101,7 @@ const mockHabits = [
   }, [habits]);
 
 
+  // Adding Habits
   const addHabit = () => {
     if (newHabit.trim() === '') return;
 
@@ -106,13 +116,14 @@ const mockHabits = [
     Keyboard.dismiss();
   };
 
+  // Deleting Habits
   const deleteHabit = (id: string) => {
   const updatedHabits = habits.filter(habit => habit.id !== id);
   setHabits(updatedHabits);
 };
 
 
-
+// Renders UI
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.date}>
@@ -180,13 +191,8 @@ const mockHabits = [
   );
 }
 
-export const options = {
-  title: 'Daily Routine',
-  headerTitleAlign: 'center',
-};
 
-
-
+// All Styles For The App
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, backgroundColor: '#fff' },
   title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, marginLeft:20},
